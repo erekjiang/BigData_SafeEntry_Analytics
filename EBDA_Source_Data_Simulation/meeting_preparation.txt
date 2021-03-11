@@ -1,0 +1,16 @@
+1. Injestion:
+- join with geo data to get lat lon
+- join with place and user
+
+(we may build multi-dimension data source here)
+
+2. Transformation:
+- data transformation, transform to graph (link different nodes)
+- data transformation, transform based on analytics purpose
+- how to do it efficiently (RDD)
+
+3. Perform analytics
+
+4. Buld up reportiong and visualtion
+
+- Source missing data: case data

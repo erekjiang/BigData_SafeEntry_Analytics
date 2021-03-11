@@ -1,0 +1,141 @@
+# Metadata for Management Corporation Strata Title
+---
+Identifier: '6e636607-a743-4169-9102-d3ae42fe7631'
+Name: 'management-corporation-strata-title'
+Title: 'Management Corporation Strata Title'
+Description: 'Information on Management Corporation Strata Title'
+Topics:
+  - 'Infrastructure'
+Keywords:
+  - 'Property'
+Publisher:
+  Name: 'Building and Construction Authority'
+  Admin 1:
+    Name: 'Ang Siang Loong'
+    Department: 'BMD'
+    Email: 'ANG_Siang_Loong@bca.gov.sg'
+  Admin 2:
+    Name: 'Ting Pei Shi'
+    Department: 'BMD'
+    Email: 'ting_pei_shi@bca.gov.sg'
+Sources:
+  - 'Building and Construction Authority'
+License: 'https://data.gov.sg/open-data-licence'
+Frequency: 'Quarterly'
+Coverage: '1968-10-23 to 2020-12-31'
+Last Updated: '2021-02-08T01:36:29.196836'
+Resources:
+  -
+    Identifier: '21b15082-ea01-40f8-ad2b-679f011d6764'
+    Title: 'Management Corporation Strata Title'
+    Url: 'https://storage.data.gov.sg/management-corporation-strata-title/resources/management-corporation-strata-title-2021-02-08T01-36-28Z.csv'
+    Format: 'CSV'
+    Coverage: '1968-10-23 to 2020-12-31'
+    Description: 'This is a listing containing information on Management Corporations,
+      their addresses and their Managing Agents'
+    Last Updated: '2021-02-08T01:36:28.722859'
+    Schema:
+      -
+        Name: 'usr_mcno'
+        Title: 'Usr mcno'
+        Type: 'text'
+        Sub Type: 'general'
+      -
+        Name: 'usr_mctype'
+        Title: 'Usr mctype'
+        Type: 'text'
+        Sub Type: 'general'
+      -
+        Name: 'sub_mcno'
+        Title: 'Sub mcno'
+        Type: 'text'
+        Sub Type: 'general'
+        Description: '"na" : Data not available or not applicable'
+      -
+        Name: 'sub_mcstuen'
+        Title: 'Sub mcstuen'
+        Type: 'text'
+        Sub Type: 'general'
+      -
+        Name: 'usr_devtname'
+        Title: 'Usr devtname'
+        Type: 'text'
+        Sub Type: 'general'
+        Description: '"na" : Data not available or not applicable'
+      -
+        Name: 'devt_location'
+        Title: 'Devt location'
+        Type: 'text'
+        Sub Type: 'general'
+        Description: '"na" : Data not available or not applicable'
+      -
+        Name: 'mcst_houseno'
+        Title: 'Mcst houseno'
+        Type: 'text'
+        Sub Type: 'general'
+        Description:
+          - '"na" : Data not available or not applicable'
+          - '"-" : Data is negligible or not significant'
+      -
+        Name: 'mcst_roadname'
+        Title: 'Mcst roadname'
+        Type: 'text'
+        Sub Type: 'general'
+        Description: '"na" : Data not available or not applicable'
+      -
+        Name: 'mcst_unitno'
+        Title: 'Mcst unitno'
+        Type: 'text'
+        Sub Type: 'address'
+        Description: '"na" : Data not available or not applicable'
+      -
+        Name: 'mcst_buildingname'
+        Title: 'Mcst buildingname'
+        Type: 'text'
+        Sub Type: 'url'
+        Description:
+          - '"na" : Data not available or not applicable'
+          - '"-" : Data is negligible or not significant'
+      -
+        Name: 'mcst_postalcode'
+        Title: 'Mcst postalcode'
+        Type: 'text'
+        Sub Type: 'postal_code'
+        Description: '"na" : Data not available or not applicable'
+      -
+        Name: 'mcst_telno'
+        Title: 'Mcst telno'
+        Type: 'text'
+        Sub Type: 'general'
+        Description:
+          - '"na" : Data not available or not applicable'
+          - '"-" : Data is negligible or not significant'
+      -
+        Name: 'ust_status'
+        Title: 'Ust status'
+        Type: 'text'
+        Sub Type: 'general'
+      -
+        Name: 'mcst_stratalota'
+        Title: 'Mcst stratalota'
+        Type: 'text'
+        Sub Type: 'general'
+      -
+        Name: 'managementname'
+        Title: 'Management Name'
+        Type: 'text'
+        Sub Type: 'general'
+        Description:
+          - '"na" : Data not available or not applicable'
+          - '"-" : Data is negligible or not significant'
+      -
+        Name: 'management_tel_no'
+        Title: 'Management tel no'
+        Type: 'text'
+        Sub Type: 'general'
+        Description: '"na" : Data not available or not applicable'
+      -
+        Name: 'mc_form_date'
+        Title: 'Mc form date'
+        Type: 'text'
+        Sub Type: 'general'
