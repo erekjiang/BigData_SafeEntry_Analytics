@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Mar 10 14:05:48 2021
 
-@author: cmbsguser
-"""
 
 import pandas as pd
 import random
