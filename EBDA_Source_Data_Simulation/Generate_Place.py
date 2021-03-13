@@ -8,6 +8,7 @@ Created on Wed Mar 10 14:05:48 2021
 import pandas as pd
 import random
 import string
+from pathlib import Path
 
 # generate users
 df_place = pd.DataFrame(columns=["place_id","place_name","url","postal_code", "address", "lat", "lon", "place category"])
@@ -15,9 +16,11 @@ df_place = pd.DataFrame(columns=["place_id","place_name","url","postal_code", "a
 # Table - places (place id, place name, bit.ly url, postal code, 
 # address, lat & long, place category(Mall, MRT, Retailer, Shops))
 
-
-df_hc = pd.read_csv(".\\in\\hawker-centres\\list-of-government-markets-hawker-centres.csv")
-df_mcst = pd.read_csv(".\\in\\mcst\\management-corporation-strata-title.csv",encoding='ANSI')
+hc_file_path = Path('in/hawker-centres/list-of-government-markets-hawker-centres.csv')
+place_file_path = Path('in/mcst/management-corporation-strata-title.csv')
+df_hc = pd.read_csv(hc_file_path)
+#df_mcst = pd.read_csv(place_file_path, encoding='ANSI')
+df_mcst = pd.read_csv(place_file_path)
 
 # process hawker centers
 for i in range(0, df_hc.shape[0]):
@@ -61,7 +64,7 @@ for j in range(df_mcst.shape[0]):
                                 'postal_code': postal_code, 
                                 'address': address},
                                ignore_index=True)
-    
-    
+
+place_file_path = Path('out/place.csv')
 df_place.to_csv('.\\out\\place.csv', index=False)
 

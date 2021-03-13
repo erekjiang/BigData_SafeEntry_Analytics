@@ -8,6 +8,7 @@ Created on Wed Mar 10 13:27:53 2021
 import pandas as pd
 import random
 import string
+from pathlib import Path
 
 # generate users
 df_resident = pd.DataFrame(columns=["resident_id","resident_name","nric","phone_number"])
@@ -23,5 +24,6 @@ for i in range(1,10000+1):
                                 'nric': nric, 
                                 'phone_number': phone_number},
                                ignore_index=True)
-    
-df_resident.to_csv('.\\out\\resident.csv', index=False)
+
+resident_file_path = Path('out/resident.csv')
+df_resident.to_csv(resident_file_path, index=False)

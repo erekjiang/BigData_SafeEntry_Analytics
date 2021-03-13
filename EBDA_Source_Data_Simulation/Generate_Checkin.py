@@ -8,9 +8,12 @@ Created on Thu Mar 11 11:49:24 2021
 import pandas as pd
 import random as rd
 import numpy as np
+from pathlib import Path
 
-df_resident = pd.read_csv('.\\out\\resident.csv')
-df_location = pd.read_csv('.\\out\\place.csv')
+resident_file_path = Path('out/resident.csv')
+place_file_path = Path('out/place.csv')
+df_resident = pd.read_csv(resident_file_path)
+df_location = pd.read_csv(place_file_path)
 
 df_checkin = pd.DataFrame(columns=["resident_id","place_id","entry_time","exit_time"])
 
@@ -19,7 +22,7 @@ location_size = df_location.shape[0]
 
 
 
-for i in range(100000):
+for i in range(100):
     print('index', i)
     date_str = '2021/02/0' + str(rd.randint(1, 7))
     
@@ -48,5 +51,6 @@ for i in range(100000):
                                     'entry_time': entry_time,
                                     'exit_time': exit_time},
                                    ignore_index=True)
-    
-df_checkin.to_csv('.\\out\\checkin.csv', index=False)  
+
+checkin_file_path = Path('out/checkin.csv')
+df_checkin.to_csv(checkin_file_path, index=False)
