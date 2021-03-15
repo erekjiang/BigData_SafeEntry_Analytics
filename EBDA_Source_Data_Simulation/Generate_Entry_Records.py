@@ -48,5 +48,5 @@ for i in range(100):
                                     'exit_time': exit_time},
                                    ignore_index=True)
 
-checkin_file_path = Path('out/checkin.csv')
+checkin_file_path = Path('out/entry_records.csv')
 df_checkin.to_csv(checkin_file_path, index=False)

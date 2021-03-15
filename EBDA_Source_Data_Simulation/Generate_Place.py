@@ -36,7 +36,7 @@ for i in range(0, df_hc.shape[0]):
 size = df_place.shape[0]
 
 # process hawker center
-# clean data
+# clean in
 df_mcst = df_mcst[df_mcst.usr_devtname != 'na']
 df_mcst = df_mcst[df_mcst.usr_devtname.isna() != True]
 df_mcst = df_mcst[~df_mcst.usr_devtname.str.lower().str.contains('terminate')]
