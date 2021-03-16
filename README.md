@@ -14,3 +14,6 @@ https://towardsdatascience.com/installing-hadoop-on-a-mac-ec01c67b003c
 hdfs UI - http://localhost:9870/dfshealth.html#tab-overview \
 hadoop UI - http://localhost:8088/cluster
  
+###Tools
+big data file viewer - https://github.com/Eugene-Mark/bigdata-file-viewer  
+Jupiter - https://jupyter.org/install
