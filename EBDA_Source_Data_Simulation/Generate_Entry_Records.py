@@ -5,13 +5,14 @@ import pandas as pd
 import random as rd
 import numpy as np
 from pathlib import Path
+import uuid
 
 resident_file_path = Path('out/resident.csv')
 place_file_path = Path('out/place.csv')
 df_resident = pd.read_csv(resident_file_path)
 df_location = pd.read_csv(place_file_path)
 
-df_checkin = pd.DataFrame(columns=["resident_id","place_id","entry_time","exit_time"])
+df_checkin = pd.DataFrame(columns=["record_id","resident_id","place_id","entry_time","exit_time"])
 
 resident_size = df_resident.shape[0]
 location_size = df_location.shape[0]
@@ -20,6 +21,7 @@ location_size = df_location.shape[0]
 
 for i in range(100):
     print('index', i)
+    record_id = uuid.uuid4()
     date_str = '2021/02/0' + str(rd.randint(1, 7))
     
     resident_index = rd.randint(0, resident_size-1)
@@ -42,7 +44,8 @@ for i in range(100):
     entry_time = date_str + " " +  f"{entry_hr:02d}" +":" + f"{entry_min:02d}"
     exit_time = date_str + " " +  f"{exit_hr:02d}" +":" + f"{exit_min:02d}"
     
-    df_checkin = df_checkin.append({'resident_id': resident_id, 
+    df_checkin = df_checkin.append({'record_id': record_id,
+                                    'resident_id': resident_id,
                                     'place_id': place_id, 
                                     'entry_time': entry_time,
                                     'exit_time': exit_time},

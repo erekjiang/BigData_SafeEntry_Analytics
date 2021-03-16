@@ -7,7 +7,7 @@ import string
 from pathlib import Path
 
 # generate users
-df_place = pd.DataFrame(columns=["place_id","place_name","url","postal_code", "address", "lat", "lon", "place category"])
+df_place = pd.DataFrame(columns=["place_id","place_name","url","postal_code", "address", "lat", "lon", "place_category"])
 
 # Table - places (place id, place name, bit.ly url, postal code, 
 # address, lat & long, place category(Mall, MRT, Retailer, Shops))
@@ -62,5 +62,5 @@ for j in range(df_mcst.shape[0]):
                                ignore_index=True)
 
 place_file_path = Path('out/place.csv')
-df_place.to_csv('.\\out\\place.csv', index=False)
+df_place.to_csv(place_file_path, index=False)
 
