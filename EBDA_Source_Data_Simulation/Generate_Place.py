@@ -5,9 +5,10 @@ import pandas as pd
 import random
 import string
 from pathlib import Path
+from datetime import datetime
 
 # generate users
-df_place = pd.DataFrame(columns=["place_id","place_name","url","postal_code", "address", "lat", "lon", "place_category"])
+df_place = pd.DataFrame(columns=["place_id","place_name","url","postal_code", "address", "lat", "lon", "place_category","last_update_dt"])
 
 # Table - places (place id, place name, bit.ly url, postal code, 
 # address, lat & long, place category(Mall, MRT, Retailer, Shops))
@@ -30,7 +31,8 @@ for i in range(0, df_hc.shape[0]):
     df_place = df_place.append({'place_id': 'pid_' + str(i+1), 
                                 'place_name': place_name, 
                                 'postal_code': postal_code, 
-                                'address': address},
+                                'address': address,
+                               'last_update_dt':datetime.now()},
                                ignore_index=True)
     
 size = df_place.shape[0]
@@ -58,7 +60,8 @@ for j in range(df_mcst.shape[0]):
     df_place = df_place.append({'place_id': 'pid_' + str(j + size), 
                                 'place_name': place_name, 
                                 'postal_code': postal_code, 
-                                'address': address},
+                                'address': address,
+                                'last_update_dt':datetime.now()},
                                ignore_index=True)
 
 place_file_path = Path('out/place.csv')

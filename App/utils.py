@@ -1,3 +1,5 @@
+import subprocess
+
 def read_csv_file(spark, file_path, schema=None):
     if schema is not None:
         df = spark.read.format('csv') \
@@ -13,3 +15,14 @@ def read_csv_file(spark, file_path, schema=None):
             .option("sep", ",") \
             .load(file_path)
     return df
+
+
+# def is_hdfs_file_exist(sparkContext,path):
+#     fs = sparkContext._jvm.org.apache.hadoop.fs.FileSystem.get(sparkContext._jsc.hadoopConfiguration())
+#     return fs.exists(sparkContext._jvm.org.apache.hadoop.fs.Path(path))
+
+
+def is_hdfs_file_exist(path):
+    proc = subprocess.Popen(['hadoop', 'fs', '-test', '-e', path])
+    proc.communicate()
+    return proc.returncode == 0
