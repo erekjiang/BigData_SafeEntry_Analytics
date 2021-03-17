@@ -6,7 +6,7 @@ https://docs.python-guide.org/starting/install3/osx/
 ### Installing spark
 https://medium.com/beeranddiapers/installing-apache-spark-on-mac-os-ce416007d79f 
 
-Spark Master UI - http://localhost:8080
+Spark Master UI - http://localhost:8080  
 Spark Application UI - http://localhost:4040
 
 ### Installing hadoop
