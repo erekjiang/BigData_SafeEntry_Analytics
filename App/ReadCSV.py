@@ -22,7 +22,7 @@ resident_file_dest = "residents.parquet"
 place_file_dest = "place.parquet"
 safe_entry_file_dest = "entry_records.parquet"
 
-# Read & Store resident file
+# Step 1: Read & Store resident file
 resident_schema = StructType([StructField("resident_id", StringType(), False),
                               StructField("resident_name", StringType(), True),
                               StructField("nric", StringType(), False),
@@ -49,7 +49,7 @@ else:
 print(f"============saved: {resident_file_dest} to hdfs============")
 
 
-# Read & Store place file
+# Step 2: Read & Store place file
 place_schema = StructType([StructField("place_id", StringType(), False),
                               StructField("place_name", StringType(), True),
                               StructField("url", StringType(), True),
@@ -69,7 +69,7 @@ place_df.write.mode("Overwrite").parquet(hdfs_host+hdfs_root_path+place_file_des
 print(f"============saved: {place_file_dest} to hdfs============")
 
 
-# Read & Store safe entry file
+# Step 3: Read & Store safe entry file
 safe_entry_schema = StructType([StructField("record_id", StringType(), False),
                                 StructField("resident_id", StringType(), False),
                               StructField("place_id", StringType(), True),
@@ -83,3 +83,6 @@ safe_entry_df.printSchema()
 
 safe_entry_df.write.mode("Overwrite").parquet(hdfs_host+hdfs_root_path+safe_entry_file_dest)
 print(f"============saved: {safe_entry_file_dest} to hdfs============")
+
+
+
