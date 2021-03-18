@@ -65,7 +65,18 @@ place_df = read_csv_file(spark, place_file_path,place_schema)
 place_df.show(100, False)
 place_df.printSchema()
 
-place_df.write.mode("Overwrite").parquet(hdfs_host+hdfs_root_path+place_file_dest)
+place_hdsf_path = hdfs_host+hdfs_root_path+place_file_dest
+is_place_hdfs_exist = is_hdfs_file_exist(hdfs_root_path+place_file_dest)
+if is_place_hdfs_exist:
+    existing_place_df = spark.read.schema(place_schema).parquet(place_hdsf_path).cache()
+    print("existing place count: ",existing_place_df.count())
+    merged_place_df = place_df.union(existing_place_df)
+    merged_place_df = merged_place_df.sort('last_update_dt', ascending=True).dropDuplicates(subset=['place_id'])
+    print("merged place count: ",merged_place_df.count())
+    merged_place_df.write.mode("Overwrite").parquet(resident_hdsf_path)
+else:
+    place_df.write.mode("Overwrite").parquet(resident_hdsf_path)
+
 print(f"============saved: {place_file_dest} to hdfs============")
 
 
@@ -81,7 +92,17 @@ safe_entry_df = read_csv_file(spark, safe_entry_file_path,safe_entry_schema)
 safe_entry_df.show(100, False)
 safe_entry_df.printSchema()
 
-safe_entry_df.write.mode("Overwrite").parquet(hdfs_host+hdfs_root_path+safe_entry_file_dest)
+save_entry_hdsf_path = hdfs_host+hdfs_root_path+safe_entry_file_dest
+is_safe_entry_hdfs_exist = is_hdfs_file_exist(hdfs_root_path+safe_entry_file_dest)
+if is_safe_entry_hdfs_exist:
+    existing_safe_entry_df = spark.read.schema(safe_entry_schema).parquet(save_entry_hdsf_path).cache()
+    print("existing place count: ",existing_safe_entry_df.count())
+    merged_safe_entry_df = safe_entry_df.union(existing_safe_entry_df)
+    merged_safe_entry_df = merged_safe_entry_df.sort('last_update_dt', ascending=True).dropDuplicates(subset=['record_id'])
+    print("merged place count: ",merged_safe_entry_df.count())
+    merged_safe_entry_df.write.mode("Overwrite").parquet(save_entry_hdsf_path)
+else:
+    safe_entry_df.write.mode("Overwrite").parquet(save_entry_hdsf_path)
 print(f"============saved: {safe_entry_file_dest} to hdfs============")
 
 
