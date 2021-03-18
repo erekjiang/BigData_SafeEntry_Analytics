@@ -1,18 +1,14 @@
 import pyspark
 from pyspark.sql import SparkSession
-from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType, TimestampType
-from pathlib import Path
 from App.utils import *
-from functools import reduce
-from pyspark.sql import DataFrame
-from pyspark.sql import functions
 
 hdfs_host = "hdfs://localhost:9000"
 hdfs_root_path = "/SafeEntry_Analytics/"
 
-conf = pyspark.SparkConf()
-spark = SparkSession.builder.appName("Read Parquet files").getOrCreate()
-sc = pyspark.SparkContext.getOrCreate(conf=conf)
+conf = pyspark.SparkConf().setAppName("Read Parquet files").setMaster("local[*]")
+sc = pyspark.SparkContext(conf=conf)
+spark = SparkSession(sc)
+
 
 resident_file_dest = "residents.parquet"
 place_file_dest = "place.parquet"
