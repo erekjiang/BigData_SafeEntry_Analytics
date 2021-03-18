@@ -1,6 +1,6 @@
 HELP.md
 target/
-venv/
+
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
@@ -19,6 +19,9 @@ venv/
 *.iws
 *.iml
 *.ipr
+
+### PyCharm ####
+venv/
 
 ### NetBeans ###
 /nbproject/private/
