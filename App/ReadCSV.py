@@ -73,9 +73,9 @@ if is_place_hdfs_exist:
     merged_place_df = place_df.union(existing_place_df)
     merged_place_df = merged_place_df.sort('last_update_dt', ascending=True).dropDuplicates(subset=['place_id'])
     print("merged place count: ",merged_place_df.count())
-    merged_place_df.write.mode("Overwrite").parquet(resident_hdsf_path)
+    merged_place_df.write.mode("Overwrite").parquet(place_hdsf_path)
 else:
-    place_df.write.mode("Overwrite").parquet(resident_hdsf_path)
+    place_df.write.mode("Overwrite").parquet(place_hdsf_path)
 
 print(f"============saved: {place_file_dest} to hdfs============")
 
