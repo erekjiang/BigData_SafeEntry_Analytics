@@ -15,6 +15,17 @@ For MacOS - https://towardsdatascience.com/installing-hadoop-on-a-mac-ec01c67b00
 hdfs UI - http://localhost:9870/dfshealth.html#tab-overview \
 hadoop UI - http://localhost:8088/cluster
  
+### Installing Kafka
+https://kafka.apache.org/quickstart
+
 ### Tools
 big data file viewer - https://github.com/Eugene-Mark/bigdata-file-viewer  
 Jupiter - https://jupyter.org/install
+
+
+
+
+Spark - 3.0.1 \
+Hadoop - 3.3.0 \
+Kafka - kafka_2.13-2.7.0 \
+Python - 3.9
