@@ -9,7 +9,6 @@ conf = pyspark.SparkConf().setAppName("Read Parquet files").setMaster("local[*]"
 sc = pyspark.SparkContext(conf=conf)
 spark = SparkSession(sc)
 
-
 resident_file_dest = "residents.parquet"
 place_file_dest = "place.parquet"
 safe_entry_file_dest = "entry_records.parquet"
