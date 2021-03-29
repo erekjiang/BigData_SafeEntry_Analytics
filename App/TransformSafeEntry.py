@@ -16,21 +16,11 @@ safe_entry_file_dest = "entry_records.parquet"
 # Step 1: read safe entry parquet file
 parquetFile = read_parquet_file(spark, hdfs_host+hdfs_root_path+safe_entry_file_dest)
 parquetFile.createOrReplaceTempView("safeEntryParquetFile")
-safe_entry_df = spark.sql("SELECT * FROM safeEntryParquetFile")
+safe_entry_df = spark.sql("SELECT * FROM safeEntryParquetFile order by entry_time")
 safe_entry_df.show()
 safe_entry_df.printSchema()
 
-# Step 2: read resident parquet file
-parquetFile = read_parquet_file(spark, hdfs_host+hdfs_root_path+resident_file_dest)
-parquetFile.createOrReplaceTempView("residentParquetFile")
-resident_df = spark.sql("SELECT * FROM residentParquetFile")
-resident_df.show()
-resident_df.printSchema()
 
-# Step 3: read place parquet file
-parquetFile = read_parquet_file(spark, hdfs_host+hdfs_root_path+place_file_dest)
-parquetFile.createOrReplaceTempView("placeParquetFile")
-place_df = spark.sql("SELECT * FROM placeParquetFile")
-place_df.show()
-place_df.printSchema()
 
+for row in safe_entry_df.rdd.collect():
+    print(row)

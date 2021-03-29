@@ -39,8 +39,9 @@ for i in range(0, df_hc.shape[0]):
 
 size = df_place.shape[0]
 
-# process hawker center
+# process mcst
 # clean in
+'''
 df_mcst = df_mcst[df_mcst.usr_devtname != 'na']
 df_mcst = df_mcst[df_mcst.usr_devtname.isna() != True]
 df_mcst = df_mcst[~df_mcst.usr_devtname.str.lower().str.contains('terminate')]
@@ -65,6 +66,7 @@ for j in range(df_mcst.shape[0]):
                                 'address': address,
                                 'last_update_dt': datetime.now()},
                                ignore_index=True)
+'''
 
 place_file_path = Path('out/place.csv')
 df_place.to_csv(place_file_path, index=False)
