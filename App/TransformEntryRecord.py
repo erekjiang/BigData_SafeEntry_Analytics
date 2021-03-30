@@ -12,7 +12,7 @@ from graphframes import *
 hdfs_host = "hdfs://localhost:9000"
 hdfs_root_path = "/SafeEntry_Analytics/"
 
-conf = pyspark.SparkConf().setAppName("Read Parquet files").setMaster("local[*]")
+conf = pyspark.SparkConf().setAppName("Transform Entry Record").setMaster("local[*]")
 sc = pyspark.SparkContext(conf=conf)
 spark = SparkSession(sc)
 
@@ -35,7 +35,6 @@ parquetFile.createOrReplaceTempView("safeEntryParquetFile")
 safe_entry_df = spark.sql("SELECT * FROM safeEntryParquetFile order by entry_time")
 safe_entry_df.show()
 safe_entry_df.printSchema()
-
 
 # Step 3: build close contact graph
 data_collect = safe_entry_df.rdd.collect()
@@ -62,7 +61,7 @@ g = GraphFrame(v, e)
 g.edges.show()
 g.vertices.show();
 
-save_contact_vertex_hdsf_path = hdfs_host+hdfs_root_path+contact_graph_vertex_file_dest
-save_contact_edge_hdsf_path = hdfs_host+hdfs_root_path+contact_graph_edge_file_dest
+save_contact_vertex_hdsf_path = hdfs_host + hdfs_root_path + contact_graph_vertex_file_dest
+save_contact_edge_hdsf_path = hdfs_host + hdfs_root_path + contact_graph_edge_file_dest
 g.vertices.write.mode("Overwrite").parquet(save_contact_vertex_hdsf_path)
 g.edges.write.mode("Overwrite").parquet(save_contact_edge_hdsf_path)
