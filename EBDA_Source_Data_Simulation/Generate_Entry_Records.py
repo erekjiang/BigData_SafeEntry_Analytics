@@ -20,7 +20,7 @@ location_size = df_location.shape[0]
 
 
 
-for i in range(100):
+for i in range(500):
     print('index', i)
     record_id = uuid.uuid4()
     date_str = '2021/02/0' + str(rd.randint(1, 7))
@@ -44,12 +44,14 @@ for i in range(100):
     
     entry_time = date_str + " " +  f"{entry_hr:02d}" +":" + f"{entry_min:02d}"
     exit_time = date_str + " " +  f"{exit_hr:02d}" +":" + f"{exit_min:02d}"
-    
+
+    datetime.strptime(entry_time, '%Y/%m/%d %H:%M')
+
     df_checkin = df_checkin.append({'record_id': record_id,
                                     'resident_id': resident_id,
                                     'place_id': place_id, 
-                                    'entry_time': entry_time,
-                                    'exit_time': exit_time,
+                                    'entry_time': datetime.strptime(entry_time, '%Y/%m/%d %H:%M'),
+                                    'exit_time': datetime.strptime(exit_time, '%Y/%m/%d %H:%M'),
                                     'last_update_dt':datetime.now()},
                                    ignore_index=True)
 
