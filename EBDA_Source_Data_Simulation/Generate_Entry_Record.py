@@ -55,5 +55,5 @@ for i in range(500):
                                     'last_update_dt':datetime.now()},
                                    ignore_index=True)
 
-checkin_file_path = Path('out/entry_records.csv')
+checkin_file_path = Path('out/entry_record.csv')
 df_checkin.to_csv(checkin_file_path, index=False)

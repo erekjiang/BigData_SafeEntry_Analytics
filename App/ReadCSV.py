@@ -16,7 +16,7 @@ sc = pyspark.SparkContext.getOrCreate(conf=conf)
 
 resident_file_path = str(Path('in/resident.csv'))
 place_file_path = str(Path('in/place.csv'))
-safe_entry_file_path = str(Path('in/entry_records.csv'))
+safe_entry_file_path = str(Path('in/entry_record.csv'))
 
 resident_file_dest = "residents.parquet"
 place_file_dest = "place.parquet"
