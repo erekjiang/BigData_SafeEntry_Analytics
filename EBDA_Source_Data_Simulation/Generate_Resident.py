@@ -10,10 +10,10 @@ from datetime import datetime
 # generate users
 df_resident = pd.DataFrame(columns=["resident_id","resident_name","nric","phone_number","last_update_dt"])
 
-for i in range(1,10000+1):
+for i in range(1,15000+1):
     resident_id = str(i)
     resident_name = "resident_name_" + str(i)
-    nric = random.choice(["S","F"]) + f"{i:06d}" + random.choice(string.ascii_letters)
+    nric = random.choice(["S","F"]) + f"{i:06d}" + random.choice(string.ascii_uppercase)
     phone_number = str(random.randint(8, 9)) + f"{i:07d}"
     
     df_resident = df_resident.append({'resident_id': 'rid_' + str(resident_id), 
