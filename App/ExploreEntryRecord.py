@@ -22,9 +22,17 @@ safe_entry_file_dest = "entry_record.parquet"
 contact_graph_edge_file_dest = "contact_graph_edge.parquet"
 contact_graph_vertex_file_dest = "contact_graph_vertex.parquet"
 
+# retrieve graph data
 e = read_parquet_file(spark, hdfs_host + hdfs_root_path + contact_graph_edge_file_dest)
 v = read_parquet_file(spark, hdfs_host + hdfs_root_path + contact_graph_vertex_file_dest)
 g = GraphFrame(v, e)
 
 g.edges.show()
 g.vertices.show();
+
+result = g.labelPropagation(maxIter=10)
+result.select("id", "label").show()
+
+result = g.stronglyConnectedComponents(maxIter=10)
+result.select("id", "component").orderBy("component").show()
+
