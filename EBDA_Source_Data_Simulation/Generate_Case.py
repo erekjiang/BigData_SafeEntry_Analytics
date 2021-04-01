@@ -13,7 +13,6 @@ ls_sg = []
 ls_fg = []
 
 for i in range(len(ls_nric)):
-    print(ls_nric[i][0])
     if ls_nric[i][0] == 'S':
         ls_sg.append(ls_nric[i])
     elif ls_nric[i][0] == 'F':
@@ -38,10 +37,6 @@ for i in range(0, df_src.shape[0]):
     caseId = uuid.uuid4()
     nationality = df_src['properties.nationality'][i]
 
-    if (nationality[0:9] == 'Singapore'):
-        nric = ls_sg.pop()
-    else:
-        nric = ls_fg.pop()
 
     age = df_src['properties.age'][i]
     gender = df_src['properties.gender'][i]
@@ -53,13 +48,21 @@ for i in range(0, df_src.shape[0]):
     dischargedDt = df_src['properties.discharged'][i]
     deadthDt = df_src['properties.death'][i]
 
+
+    if (nationality[0:9] == 'Singapore' and diagnosedDt == '2020-04-19'):
+        nric = ls_sg.pop()
+    elif(diagnosedDt == '2020-04-19'):
+        nric = ls_fg.pop()
+    else:
+        nric=''
+
     df_case = df_case.append({'caseId': caseId,
                               'nric':nric,
                               'nationality': nationality,
                               'age': age,
                               'gender': gender,
-                              'diagnosedDt': dischargedDt,
-                              'importCase': importedCase,
+                              'diagnosedDate': diagnosedDt,
+                              'importedCase': importedCase,
                               'hospitalizedHospital': hospitalizedHospital,
                               'dischargedDt': dischargedDt,
                               'deadthDt': deadthDt
