@@ -18,9 +18,9 @@ resident_file_path = str(Path('in/resident.csv'))
 place_file_path = str(Path('in/place.csv'))
 safe_entry_file_path = str(Path('in/entry_record.csv'))
 
-resident_file_dest = "residents.parquet"
+resident_file_dest = "resident.parquet"
 place_file_dest = "place.parquet"
-safe_entry_file_dest = "entry_records.parquet"
+safe_entry_file_dest = "entry_record.parquet"
 
 # Step 1: Read & Store resident file
 resident_schema = StructType([StructField("resident_id", StringType(), False),

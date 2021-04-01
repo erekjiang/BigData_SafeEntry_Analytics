@@ -9,9 +9,9 @@ conf = pyspark.SparkConf().setAppName("Read Parquet files").setMaster("local[*]"
 sc = pyspark.SparkContext(conf=conf)
 spark = SparkSession(sc)
 
-resident_file_dest = "residents.parquet"
+resident_file_dest = "resident.parquet"
 place_file_dest = "place.parquet"
-safe_entry_file_dest = "entry_records.parquet"
+safe_entry_file_dest = "entry_record.parquet"
 
 # Step 1: read safe entry parquet file
 parquetFile = read_parquet_file(spark, hdfs_host+hdfs_root_path+safe_entry_file_dest)

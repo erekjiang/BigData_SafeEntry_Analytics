@@ -16,9 +16,9 @@ conf = pyspark.SparkConf().setAppName("Explore Entry Record").setMaster("local[*
 sc = pyspark.SparkContext(conf=conf)
 spark = SparkSession(sc)
 
-resident_file_dest = "residents.parquet"
+resident_file_dest = "resident.parquet"
 place_file_dest = "place.parquet"
-safe_entry_file_dest = "entry_records.parquet"
+safe_entry_file_dest = "entry_record.parquet"
 contact_graph_edge_file_dest = "contact_graph_edge.parquet"
 contact_graph_vertex_file_dest = "contact_graph_vertex.parquet"
 
