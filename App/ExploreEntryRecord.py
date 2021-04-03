@@ -30,8 +30,8 @@ g = GraphFrame(v, e)
 g.edges.show()
 g.vertices.show();
 
-result = g.stronglyConnectedComponents(maxIter=10)
-result.select("id", "component").orderBy("component").show(100, False)
+#result = g.stronglyConnectedComponents(maxIter=10)
+#result.select("id", "component").orderBy("component").show(100, False)
 
-results = g.shortestPaths(landmarks=["rid_150"])
-results.select("id", "distances").show(20,False)
+#results = g.shortestPaths(landmarks=["rid_150"])
+#results.select("id", "distances").show(20,False)
