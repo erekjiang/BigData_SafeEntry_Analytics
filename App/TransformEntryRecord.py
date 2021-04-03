@@ -44,7 +44,7 @@ contact_list = []
 for i in range(row_count):
     for j in range(i + 1, row_count):
         minute_diff = (data_collect[i]['exit_time'] - data_collect[j]['entry_time']).total_seconds() / 60.0
-        same_place = place_id_i = data_collect[i]['place_id'] == data_collect[j]['place_id']
+        same_place = data_collect[i]['place_id'] == data_collect[j]['place_id']
 
         if (minute_diff > 5 and same_place):
             contact_tuple = (data_collect[i]['resident_id'], data_collect[j]['resident_id'], 'close_contact')

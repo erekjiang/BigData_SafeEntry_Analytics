@@ -23,7 +23,7 @@ location_size = df_location.shape[0]
 for i in range(2000):
     print('index', i)
     record_id = uuid.uuid4()
-    date_str = '2021/02/0' + str(rd.randint(1, 7))
+    date_str = '2021/04/' + str(rd.randint(11, 17))
     
     resident_index = rd.randint(0, resident_size-1)
     place_index=rd.randint(0, location_size-1)
