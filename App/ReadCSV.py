@@ -36,17 +36,17 @@ resident_df.show(100, False)
 resident_df.printSchema()
 print("new resident count: ", resident_df.count())
 
-resident_hdsf_path = hdfs_host + hdfs_root_path + resident_file_dest
+resident_hdfs_path = hdfs_host + hdfs_root_path + resident_file_dest
 is_resident_hdfs_exist = is_hdfs_file_exist(hdfs_root_path + resident_file_dest)
 if is_resident_hdfs_exist:
-    existing_resident_df = spark.read.schema(resident_schema).parquet(resident_hdsf_path).cache()
+    existing_resident_df = spark.read.schema(resident_schema).parquet(resident_hdfs_path).cache()
     print("existing resident count: ", existing_resident_df.count())
     merged_resident_df = resident_df.union(existing_resident_df)
     merged_resident_df = merged_resident_df.sort('last_update_dt', ascending=True).dropDuplicates(subset=['nric'])
     print("merged resident count: ", merged_resident_df.count())
-    merged_resident_df.write.mode("Overwrite").parquet(resident_hdsf_path)
+    merged_resident_df.write.mode("Overwrite").parquet(resident_hdfs_path)
 else:
-    resident_df.write.mode("Overwrite").parquet(resident_hdsf_path)
+    resident_df.write.mode("Overwrite").parquet(resident_hdfs_path)
 
 print(f"============saved: {resident_file_dest} to hdfs============")
 
@@ -65,17 +65,17 @@ place_df = read_csv_file(spark, place_file_path, place_schema)
 place_df.show(100, False)
 place_df.printSchema()
 
-place_hdsf_path = hdfs_host + hdfs_root_path + place_file_dest
+place_hdfs_path = hdfs_host + hdfs_root_path + place_file_dest
 is_place_hdfs_exist = is_hdfs_file_exist(hdfs_root_path + place_file_dest)
 if is_place_hdfs_exist:
-    existing_place_df = spark.read.schema(place_schema).parquet(place_hdsf_path).cache()
+    existing_place_df = spark.read.schema(place_schema).parquet(place_hdfs_path).cache()
     print("existing place count: ", existing_place_df.count())
     merged_place_df = place_df.union(existing_place_df)
     merged_place_df = merged_place_df.sort('last_update_dt', ascending=True).dropDuplicates(subset=['place_id'])
     print("merged place count: ", merged_place_df.count())
-    merged_place_df.write.mode("Overwrite").parquet(place_hdsf_path)
+    merged_place_df.write.mode("Overwrite").parquet(place_hdfs_path)
 else:
-    place_df.write.mode("Overwrite").parquet(place_hdsf_path)
+    place_df.write.mode("Overwrite").parquet(place_hdfs_path)
 
 print(f"============saved: {place_file_dest} to hdfs============")
 
