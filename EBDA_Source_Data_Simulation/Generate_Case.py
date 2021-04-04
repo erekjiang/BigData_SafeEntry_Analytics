@@ -4,6 +4,7 @@
 import pandas as pd
 from pathlib import Path
 import uuid
+from datetime import datetime
 
 # find NRIC
 df_resident =pd.read_csv(Path('out/resident.csv'))
@@ -48,7 +49,6 @@ for i in range(0, df_src.shape[0]):
     dischargedDt = df_src['properties.discharged'][i]
     deadthDt = df_src['properties.death'][i]
 
-
     if (nationality[0:9] == 'Singapore' and diagnosedDt == '2020-04-19'):
         nric = ls_sg.pop()
     elif(diagnosedDt == '2020-04-19'):
@@ -65,8 +65,8 @@ for i in range(0, df_src.shape[0]):
                               'importedCase': importedCase,
                               'hospitalizedHospital': hospitalizedHospital,
                               'dischargedDt': dischargedDt,
-                              'deadthDt': deadthDt
-                              },
+                              'deadthDt': deadthDt,
+                              'lastUpdatedDttm': datetime.now()},
                              ignore_index=True)
 
 place_file_path = Path('out/case.csv')
