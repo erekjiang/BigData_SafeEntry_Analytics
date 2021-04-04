@@ -1,3 +1,4 @@
+resident_id,resident_name,nric,phone_number,last_update_dt
 rid_1,resident_name_1,F000001C,80000001,2021-04-01T16:59:09.406+08:00
 rid_2,resident_name_2,F000002P,90000002,2021-04-01T16:59:09.409+08:00
 rid_3,resident_name_3,S000003D,80000003,2021-04-01T16:59:09.412+08:00

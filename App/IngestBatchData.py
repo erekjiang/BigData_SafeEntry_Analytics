@@ -11,7 +11,7 @@ hdfs_host = "hdfs://localhost:9000"
 hdfs_root_path = "/SafeEntry_Analytics/"
 
 conf = pyspark.SparkConf()
-spark = SparkSession.builder.appName("Read CSV files").getOrCreate()
+spark = SparkSession.builder.appName("Ingest Batch Data").getOrCreate()
 sc = pyspark.SparkContext.getOrCreate(conf=conf)
 
 resident_file_path = str(Path('in/resident.csv'))
