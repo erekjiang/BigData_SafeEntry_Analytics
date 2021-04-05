@@ -66,8 +66,8 @@ for i in range(0, df_hc.shape[0]):
 
     # retrieve lat long
     postal = postal_code[0:6]
-    latitude = ''
-    longitude = ''
+    latitude = '0'
+    longitude = '0'
     if postal.isnumeric():
         df_location = df_pc.loc[df_pc['POSTAL'] == postal]
         if df_location.empty:
