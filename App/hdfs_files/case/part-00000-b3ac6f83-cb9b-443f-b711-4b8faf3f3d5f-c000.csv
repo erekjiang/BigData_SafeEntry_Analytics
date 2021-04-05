@@ -1,3 +1,4 @@
+caseId,nric,passType,nationality,race,name,birthDt,age,gender,diagnosedDate,active,activeStatus,importedCase,importedFromCountry,hospitalizedHospital,admittedDt,dischargedDt,deceased,deadthDt,createdDttm,lastUpdatedDttm
 bcfc785c-3989-4e5a-be4b-b9b3db5f7e8f,"","",Chinese,"","","",66,Male,2020-01-23T00:00:00.000+08:00,"","",Imported,"",Singapore General Hospital,"",2020-02-19T00:00:00.000+08:00,"","","",2021-04-02T00:11:12.583+08:00
 3787bd19-f54b-4c32-853a-e85723421b09,"","",Chinese,"","","",53,Female,2020-01-24T00:00:00.000+08:00,"","",Imported,"",National Centre for Infectious Diseases,"",2020-02-07T00:00:00.000+08:00,"","","",2021-04-02T00:11:12.592+08:00
 002ac11c-2207-47f2-bfc7-e39393820dda,"","",Chinese,"","","",37,Male,2020-01-24T00:00:00.000+08:00,"","",Imported,"",Singapore General Hospital,"",2020-02-21T00:00:00.000+08:00,"","","",2021-04-02T00:11:12.600+08:00

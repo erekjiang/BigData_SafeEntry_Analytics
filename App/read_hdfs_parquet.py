@@ -20,13 +20,13 @@ contact_graph_vertex_file_dest = "contact_graph_vertex.parquet"
 safe_entry_df  = read_parquet_file(spark, hdfs_host+hdfs_root_path+safe_entry_file_dest)
 safe_entry_df.show()
 safe_entry_df.printSchema()
-safe_entry_df.coalesce(1).write.mode("overwrite").csv("hdfs_files/safe_entry")
+safe_entry_df.coalesce(1).write.format("csv").option("header","true").option("sep",",").mode("overwrite").save("hdfs_files/safe_entry")
 
 # Step 2: read resident parquet file
 resident_df = read_parquet_file(spark, hdfs_host+hdfs_root_path+resident_file_dest)
 resident_df.show()
 resident_df.printSchema()
-resident_df.coalesce(1).write.mode("overwrite").csv("hdfs_files/resident")
+resident_df.coalesce(1).write.format("csv").option("header","true").option("sep",",").mode("overwrite").save("hdfs_files/resident")
 
 # Step 3: read place parquet file
 place_df = read_parquet_file(spark, hdfs_host+hdfs_root_path+place_file_dest)
@@ -38,16 +38,16 @@ place_df.coalesce(1).write.mode("overwrite").csv("hdfs_files/place")
 case_df = read_parquet_file(spark, hdfs_host+hdfs_root_path+case_file_dest)
 case_df.show()
 case_df.printSchema()
-case_df.coalesce(1).write.mode("overwrite").csv("hdfs_files/case")
+case_df.coalesce(1).write.format("csv").option("header","true").option("sep",",").mode("overwrite").save("hdfs_files/case")
 
 # Step 5: read Contact Graph Edge parquet file
 contact_graph_edge_df= read_parquet_file(spark, hdfs_host+hdfs_root_path+contact_graph_edge_file_dest)
 contact_graph_edge_df.show()
 contact_graph_edge_df.printSchema()
-contact_graph_edge_df.coalesce(1).write.mode("overwrite").csv("hdfs_files/contact_graph_edge")
+contact_graph_edge_df.coalesce(1).write.format("csv").option("header","true").option("sep",",").mode("overwrite").save("hdfs_files/contact_graph_edge")
 
 # Step 6: read Contact Graph Edge parquet file
 contact_graph_vertex_df = read_parquet_file(spark, hdfs_host+hdfs_root_path+contact_graph_vertex_file_dest)
 contact_graph_vertex_df.show()
 contact_graph_vertex_df.printSchema()
-contact_graph_vertex_df.coalesce(1).write.mode("overwrite").csv("hdfs_files/contact_graph_vertex")
+contact_graph_vertex_df.coalesce(1).write.format("csv").option("header","true").option("sep",",").mode("overwrite").save("hdfs_files/contact_graph_vertex")
