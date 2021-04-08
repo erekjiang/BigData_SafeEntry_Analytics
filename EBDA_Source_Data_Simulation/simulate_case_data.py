@@ -23,7 +23,7 @@ for i in range(len(ls_nric)):
 df_case = pd.DataFrame(
     columns=["caseId", "nric", "passType", "nationality", "race", "name", "birthDt", "age",
              "gender", "diagnosedDate", "active", "activeStatus", "importedCase", "importedFromCountry",
-             "hospitalizedHospital", "admittedDt", "dischargedDt", "deceased", "deadthDt", "createdDttm",
+             "hospitalizedHospital", "admittedDt", "dischargedDt", "deceased", "deceasedDt", "createdDttm",
              "lastUpdatedDttm"])
 
 case_file_path = Path('in/case/covid-sg.json')
@@ -65,7 +65,7 @@ for i in range(0, df_src.shape[0]):
                               'importedCase': importedCase,
                               'hospitalizedHospital': hospitalizedHospital,
                               'dischargedDt': dischargedDt,
-                              'deadthDt': deadthDt,
+                              'deceasedDt': deadthDt,
                               'lastUpdatedDttm': datetime.now()},
                              ignore_index=True)
 

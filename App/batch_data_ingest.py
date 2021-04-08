@@ -124,7 +124,7 @@ case_schema = StructType([StructField("caseId", StringType(), False),
                           StructField("admittedDt", TimestampType(), True),
                           StructField("dischargedDt", TimestampType(), True),
                           StructField("deceased", StringType(), True),
-                          StructField("deadthDt", TimestampType(), True),
+                          StructField("deceasedDt", TimestampType(), True),
                           StructField("createdDttm", TimestampType(), True),
                           StructField("lastUpdatedDttm", TimestampType(), True)])
 
