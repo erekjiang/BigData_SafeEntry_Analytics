@@ -9,7 +9,7 @@
     <content url="jar://$USER_HOME$/Downloads/spark-streaming-kafka-0-10_2.12-3.0.1.jar!/" />
     <content url="jar:///usr/local/Cellar/apache-spark/3.0.1/libexec/python/lib/py4j-0.10.9-src.zip!/" />
     <content url="jar:///usr/local/Cellar/apache-spark/3.0.1/libexec/python/lib/pyspark.zip!/" />
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.9" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
