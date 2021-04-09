@@ -43,14 +43,16 @@ for i in range(row_count):
         same_place = data_collect[i]['place_id'] == data_collect[j]['place_id']
 
         if (minute_diff > 5 and same_place):
-            contact_tuple = (data_collect[i]['resident_id'], data_collect[j]['resident_id'], 'close_contact')
-            contact_list.append(contact_tuple)
+            contact_tuple_dir1 = (data_collect[i]['resident_id'], data_collect[j]['resident_id'])
+            contact_tuple_dir2 = (data_collect[j]['resident_id'],data_collect[i]['resident_id'])
+            contact_list.append(contact_tuple_dir1)
+            contact_list.append(contact_tuple_dir2)
 
 print('contact list', contact_list)
 print('number of close contact', len(contact_list))
 
 v = resident_df.withColumnRenamed('resident_id', 'id')
-e = spark.createDataFrame(contact_list, ['src', 'dst', 'relationship'])
+e = spark.createDataFrame(contact_list, ['src', 'dst'])
 
 g = GraphFrame(v, e)
 

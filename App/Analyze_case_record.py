@@ -1,4 +1,5 @@
 import pyspark
+from pyspark.ml.linalg import Vectors
 from pyspark.ml.regression import LinearRegression
 from pyspark.sql import SparkSession
 from App.utils import *
@@ -28,7 +29,6 @@ fig.add_trace(go.Scatter(x=case_daily_pdf['Date'], y=case_daily_pdf['mov_avg'], 
 fig.add_trace(go.Scatter(x=case_daily_pdf['Date'], y=case_daily_pdf['count'], name="count"))
 fig.show()
 
-
 # Step 3: build model
 row_with_index = Row(
     "Date"
@@ -57,7 +57,7 @@ final_data = polyDF.select("polyFeatures","count")
 final_data.show()
 
 # Split into training and testing datasets
-train_data, test_data = final_data.randomSplit([0.7,0.3])
+train_data, test_data = final_data.randomSplit([0.8,0.2])
 train_data.describe().show()
 test_data.describe().show()
 
@@ -69,7 +69,17 @@ lrModel = lr.fit(train_data,)
 # print the coefficients and intercept for linear regression
 print("Coefficients: {} Intercept {}".format(lrModel.coefficients, lrModel.intercept))
 
+# Evaluate model
 test_result = lrModel.evaluate(test_data)
 test_result.residuals.show()
 print("RMSE:{}".format(test_result.rootMeanSquaredError))
 print("MSE: {}".format(test_result.meanSquaredError))
+
+# Predict period T
+pred_data = spark.createDataFrame([
+    (Vectors.dense([130.0]),600)], ["polyFeatures", 'count'])
+
+pred_result = lrModel.transform(pred_data)
+pred_result.printSchema()
+
+print(lrModel.predict(Vectors.dense([130.0])))

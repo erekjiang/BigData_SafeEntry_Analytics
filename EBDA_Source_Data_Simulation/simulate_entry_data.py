@@ -18,9 +18,7 @@ df_checkin = pd.DataFrame(columns=["record_id","resident_id","place_id","entry_t
 resident_size = df_resident.shape[0]
 location_size = df_location.shape[0]
 
-
-
-for i in range(2000):
+for i in range(1500):
     print('index', i)
     record_id = uuid.uuid4()
     date_str = '2021/04/' + str(rd.randint(11, 17))
@@ -32,7 +30,7 @@ for i in range(2000):
     place_id = df_location['place_id'][place_index]
 
     entry_time_stamp = rd.randint(8*60, 20*60)
-    duration = np.random.normal(60, 20)
+    duration = np.random.normal(60, 40)
     
     exit_time_stamp = entry_time_stamp + int(duration)
     
