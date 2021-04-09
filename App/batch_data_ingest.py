@@ -18,11 +18,13 @@ resident_file_path = str(Path('in/resident.csv'))
 place_file_path = str(Path('in/place.csv'))
 safe_entry_file_path = str(Path('in/entry_record.csv'))
 case_file_path = str(Path('in/case.csv'))
+case_daily_file_path = str(Path('in/sg_covid_daily_sum.csv'))
 
 resident_file_dest = "resident.parquet"
 place_file_dest = "place.parquet"
 safe_entry_file_dest = "entry_record.parquet"
 case_file_dest = "case.parquet"
+case_daily_file_dest = "case_daily_summary.parquet"
 
 # Step 1: Read & Store resident file
 resident_schema = StructType([StructField("resident_id", StringType(), False),
@@ -145,3 +147,16 @@ if is_case_hdfs_exist:
 else:
     case_df.write.mode("Overwrite").parquet(case_hdfs_path)
 print(f"============saved: {case_file_dest} to hdfs============")
+
+# Step 5: Read & Store case daily summary file
+case_daily_schema = StructType([StructField("date", StringType(), False),
+                                StructField("dailyConfirmed", IntegerType(), True)
+                                ])
+
+case_daily_df = read_csv_file(spark, case_daily_file_path, case_daily_schema)
+case_daily_df.show(100, False)
+case_daily_df.printSchema()
+
+case_daily_hdfs_path = hdfs_host + hdfs_root_path + case_daily_file_dest
+case_daily_df.write.mode("Overwrite").parquet(case_daily_hdfs_path)
+print(f"============saved: {case_daily_file_dest} to hdfs============")
