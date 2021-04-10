@@ -47,9 +47,9 @@ df_place = pd.DataFrame(
 # Table - places (place id, place name, bit.ly url, postal code,
 # address, lat & long, place category(Mall, MRT, Retailer, Shops))
 
-df_hc = pd.read_csv(".\\in\\hawker-centres\\list-of-government-markets-hawker-centres.csv")
-df_mcst = pd.read_csv(".\\in\\mcst\\management-corporation-strata-title.csv", encoding='ANSI')
-df_pc = pd.read_json(".\\in\\one-map\\singpostcode.json")
+df_hc = pd.read_csv(Path('in/hawker-centres/list-of-government-markets-hawker-centres.csv'))
+#df_mcst = pd.read_csv(Path('in/mcst/management-corporation-strata-title.csv'), encoding='ANSI')
+df_pc = pd.read_json(Path('in/one-map/singpostcode.json'))
 # df_hc = pd.read_csv(hc_file_path)
 # # df_mcst = pd.read_csv(place_file_path, encoding='ANSI')
 # df_mcst = pd.read_csv(place_file_path)

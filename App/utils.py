@@ -1,4 +1,8 @@
 import subprocess
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType, TimestampType, LongType
+from pyspark.sql.functions import desc, row_number, monotonically_increasing_id
+from pyspark.sql.window import Window
+
 
 def read_csv_file(spark, file_path, schema=None):
     if schema is not None:
@@ -30,3 +34,9 @@ def is_hdfs_file_exist(path):
     proc = subprocess.Popen(['hadoop', 'fs', '-test', '-e', path])
     proc.communicate()
     return proc.returncode == 0
+
+
+def add_index_to_dataframe(df):
+    return df.withColumn('index', row_number().over(Window.orderBy(monotonically_increasing_id())))
+
+
