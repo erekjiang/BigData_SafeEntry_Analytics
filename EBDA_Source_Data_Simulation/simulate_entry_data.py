@@ -22,7 +22,7 @@ for i in range(1000 *3*25):
     print('index', i)
     record_id = uuid.uuid4()
 
-    end = datetime.strptime('2021/4/10', '%Y/%m/%d')
+    end = datetime.strptime('2021/4/5', '%Y/%m/%d')
     start = end + timedelta(days=-25)
 
     date_str = (start + (end - start) * rd.random()).strftime('%Y/%m/%d')
