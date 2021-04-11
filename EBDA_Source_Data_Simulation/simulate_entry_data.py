@@ -6,7 +6,7 @@ import random as rd
 import numpy as np
 from pathlib import Path
 import uuid
-from datetime import datetime
+from datetime import datetime, timedelta
 
 resident_file_path = Path('out/resident.csv')
 place_file_path = Path('out/place.csv')
@@ -18,10 +18,14 @@ df_checkin = pd.DataFrame(columns=["record_id","resident_id","place_id","entry_t
 resident_size = df_resident.shape[0]
 location_size = df_location.shape[0]
 
-for i in range(1500):
+for i in range(1000 *3*25):
     print('index', i)
     record_id = uuid.uuid4()
-    date_str = '2021/04/' + str(rd.randint(11, 17))
+
+    end = datetime.strptime('2021/4/10', '%Y/%m/%d')
+    start = end + timedelta(days=-25)
+
+    date_str = (start + (end - start) * rd.random()).strftime('%Y/%m/%d')
     
     resident_index = rd.randint(0, resident_size-1)
     place_index=rd.randint(0, location_size-1)
