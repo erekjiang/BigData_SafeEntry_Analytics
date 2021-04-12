@@ -22,7 +22,7 @@ for i in range(len(ls_nric)):
         ls_fg.append(ls_nric[i])
         
 # Get interim result
-case_file_path = Path('out/case_full.csv')
+case_file_path = Path('out/case.csv')
 df_case= pd.read_csv(case_file_path)
 
 start_row = 60557
@@ -36,6 +36,6 @@ for j in range(start_row, df_case.shape[0]):
         
     df_case['nric'][j] = nric
 
-place_file_path = Path('out/case_full.csv')
+place_file_path = Path('out/case.csv')
 df_case.to_csv(place_file_path, index=False)
     

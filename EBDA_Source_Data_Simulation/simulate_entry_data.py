@@ -18,7 +18,7 @@ df_checkin = pd.DataFrame(columns=["record_id","resident_id","place_id","entry_t
 resident_size = df_resident.shape[0]
 location_size = df_location.shape[0]
 
-for i in range(1000 *3*25):
+for i in range(1000*1*25):
     print('index', i)
     record_id = uuid.uuid4()
 
@@ -58,4 +58,5 @@ for i in range(1000 *3*25):
                                    ignore_index=True)
 
 checkin_file_path = Path('out/entry_record.csv')
+df_checkin.sort_values(by=['entry_time'], inplace=True)
 df_checkin.to_csv(checkin_file_path, index=False)

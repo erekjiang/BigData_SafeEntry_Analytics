@@ -135,7 +135,7 @@ for i in range(88, case_sum_row_count):
         print(df_case_sum['Date'][i])
 
 
-place_file_path = Path('out/case_full.csv')
+place_file_path = Path('out/case.csv')
 df_case.to_csv(place_file_path, index=False)
 
 

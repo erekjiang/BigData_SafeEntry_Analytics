@@ -50,10 +50,6 @@ df_place = pd.DataFrame(
 df_hc = pd.read_csv(Path('in/hawker-centres/list-of-government-markets-hawker-centres.csv'))
 #df_mcst = pd.read_csv(Path('in/mcst/management-corporation-strata-title.csv'), encoding='ANSI')
 df_pc = pd.read_json(Path('in/one-map/singpostcode.json'))
-# df_hc = pd.read_csv(hc_file_path)
-# # df_mcst = pd.read_csv(place_file_path, encoding='ANSI')
-# df_mcst = pd.read_csv(place_file_path)
-# df_pc = pd.read_json("./in/location/singpostcode.json")
 
 # process hawker centers
 for i in range(0, df_hc.shape[0]):
