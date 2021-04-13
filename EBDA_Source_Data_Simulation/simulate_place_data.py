@@ -87,41 +87,18 @@ for i in range(0, df_hc.shape[0]):
 
 size = df_place.shape[0]
 
-# process mcst
-# clean in
-'''
-df_mcst = df_mcst[df_mcst.usr_devtname != 'na']
-df_mcst = df_mcst[df_mcst.usr_devtname.isna() != True]
-df_mcst = df_mcst[~df_mcst.usr_devtname.str.lower().str.contains('terminate')]
-df_mcst = df_mcst[~df_mcst.usr_devtname.str.lower().str.contains('en-bloc')]
+# process mall
+mall_file_path = Path('in/one-map/database.json')
+df_mall = pd.read_json(mall_file_path)
+df_mall = df_mall[df_mall['BUILDING'].str.contains("MALL")].drop_duplicates('BUILDING', keep=False).reset_index()
 
-df_mcst = df_mcst[df_mcst.mcst_buildingname != 'na']
-df_mcst = df_mcst[df_mcst.devt_location != 'na']
 
-df_mcst = df_mcst.reset_index(drop=True)
-
-for j in range(df_mcst.shape[0]):
-    place_name = df_mcst['usr_devtname'][j]
-
-    address = df_mcst['devt_location'][j]
-    list_address = address.split(" ")
-
-    postal_code = list_address[-1].strip()
-    
-    # retrieve lat long
-    postal = postal_code[0:6]
-    latitude = ''
-    longitude = ''
-    if postal.isnumeric():
-        df_location = df_pc.loc[df_pc['POSTAL'] == postal_code[0:6]]
-        if df_location.empty:
-            location = pcode_to_data('%06d' % int(postal_code[0:6]))
-            if len(location) > 0:
-                latitude = location[0]['LATITUDE']
-                longitude = location[0]['LONGITUDE']
-        else:
-            latitude = df_location.iloc[0]['LATITUDE']
-            longitude = df_location.iloc[0]['LONGITUDE']
+for j in range(df_mall.shape[0]):
+    place_name =df_mall['BUILDING'][j]
+    address = df_mall['ADDRESS'][j]
+    postal_code = df_mall['POSTAL'][j]
+    latitude = df_mall['LATITUDE'][j]
+    longitude = df_mall['LONGTITUDE'][j]
 
     df_place = df_place.append({'place_id': 'pid_' + str(j + size),
                                 'place_name': place_name,
@@ -132,7 +109,7 @@ for j in range(df_mcst.shape[0]):
                                 'lon': longitude
                                 },
                                ignore_index=True)
-'''
+    
 
 place_file_path = Path('out/place.csv')
 df_place.to_csv(place_file_path, index=False)
