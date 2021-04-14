@@ -12,7 +12,7 @@ from graphframes import *
 hdfs_host = "hdfs://localhost:9000"
 hdfs_root_path = "/SafeEntry_Analytics/"
 
-conf = pyspark.SparkConf().setAppName("Process Entry Record").setMaster("local[*]")
+conf = pyspark.SparkConf().setAppName("Process Entry Record Graph").setMaster("local[*]")
 sc = pyspark.SparkContext(conf=conf)
 spark = SparkSession(sc)
 
@@ -26,12 +26,9 @@ resident_df = read_parquet_file(spark, hdfs_host + hdfs_root_path + resident_fil
 # resident_df.show()
 # resident_df.printSchema()
 
-# Step 2: read safe entry parquet file
-
-
-# Step 3: build close contact graph
+# Step 2: read safe entry parquet file and build close contact graph
 contact_list = []
-f = open("tmp/entry_date.txt")
+f = open("in/tmp/entry_date.txt")
 date_list = f.read().splitlines()
 
 for i in range(len(date_list)):

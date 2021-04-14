@@ -15,7 +15,7 @@ from graphframes import *
 hdfs_host = "hdfs://localhost:9000"
 hdfs_root_path = "/SafeEntry_Analytics/"
 
-conf = pyspark.SparkConf().setAppName("Process Entry Record").setMaster("local[*]")
+conf = pyspark.SparkConf().setAppName("Process Entry Record Daily").setMaster("local[*]")
 sc = pyspark.SparkContext(conf=conf)
 spark = SparkSession(sc)
 
@@ -49,6 +49,6 @@ for i in range(len(entry_date)):
     case_daily_hdfs_path = hdfs_host + hdfs_root_path + date +"_"+ safe_entry_daily_file_dest
     safe_entry_daily_df.write.mode("Overwrite").parquet(case_daily_hdfs_path)
 
-f = open("tmp/entry_date.txt", "w")
+f = open("in/tmp/entry_date.txt", "w")
 f.write('\n'.join(entry_date_list))
 f.close()
