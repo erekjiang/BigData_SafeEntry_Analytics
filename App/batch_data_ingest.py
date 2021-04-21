@@ -150,7 +150,26 @@ print(f"============saved: {case_file_dest} to hdfs============")
 
 # Step 5: Read & Store case daily summary file
 case_daily_schema = StructType([StructField("date", StringType(), False),
-                                StructField("dailyConfirmed", IntegerType(), True)
+                                StructField("dailyConfirmed", IntegerType(), True),
+                                StructField("falsePositiveFound", IntegerType(), True),
+                                StructField("cumulativeConfirmed", IntegerType(), True),
+                                StructField("dailyDischarged", IntegerType(), True),
+                                StructField("passedButNotDueToCovid", IntegerType(), True),
+                                StructField("cumulativeDischarged", IntegerType(), True),
+                                StructField("dischargedToIsolation", IntegerType(), True),
+                                StructField("stillHospitalized", IntegerType(), True),
+                                StructField("dailyDeaths", IntegerType(), True),
+                                StructField("cumulativeDeaths", IntegerType(), True),
+                                StructField("testedPositiveDemise", IntegerType(), True),
+                                StructField("dailyImported", IntegerType(), True),
+                                StructField("dailyLocalTransmission", IntegerType(), True),
+                                StructField("localCaseResidingInDorms", IntegerType(), True),
+                                StructField("localCaseNotResidingInDorms", IntegerType(), True),
+                                StructField("intensiveCareUnitCases", IntegerType(), True),
+                                StructField("generalWardsMOHReport", IntegerType(), True),
+                                StructField("inIsolationMOHReport", IntegerType(), True),
+                                StructField("totalCompletedIsolationMOHReport", IntegerType(), True),
+                                StructField("totalHospitalDischargedMOHReport", IntegerType(), True)
                                 ])
 
 case_daily_df = read_csv_file(spark, case_daily_file_path, case_daily_schema)
