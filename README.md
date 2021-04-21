@@ -29,3 +29,10 @@ Spark - 3.0.1 \
 Hadoop - 3.3.0 \
 Kafka - kafka_2.13-2.7.0 \
 Python - 3.9
+
+
+Distributed or replicated OLTP
+Multi-datacenter deployments
+Multi-region deployments
+Cloud migrations
+Infrastructure initiatives built for the cloud
