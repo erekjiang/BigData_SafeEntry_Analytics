@@ -107,7 +107,7 @@ def choose_hopital():
 
 case_sum_row_count = df_case_sum.shape[0]
 for i in range(88, case_sum_row_count):
-    case_num = df_case_sum['Daily Confirmed'][i]
+    case_num = df_case_sum['Daily Confirmed '][i]
     
     for j in range(case_num):    
         rand = rd.random()
