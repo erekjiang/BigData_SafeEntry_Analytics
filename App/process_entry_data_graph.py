@@ -34,11 +34,14 @@ date_list = f.read().splitlines()
 for i in range(len(date_list)):
     safe_entry_daily_df= read_parquet_file(spark,
                                       hdfs_host + hdfs_root_path + date_list[i] + '_' + safe_entry_daily_file_dest)
+    safe_entry_daily_df.cache()
     print('------' + hdfs_host + hdfs_root_path + date_list[i] + '_' + safe_entry_daily_file_dest + '-------')
     #safe_entry_daily_df.show()
     print('number of rows', safe_entry_daily_df.count())
 
     data_collect = safe_entry_daily_df.rdd.collect()
+    safe_entry_daily_df.unpersist()
+
     row_count = len(data_collect)
 
     for i in range(row_count):
@@ -61,7 +64,7 @@ v = resident_df.withColumnRenamed('resident_id', 'id')
 e = spark.createDataFrame(contact_list, ['src', 'dst'])
 
 g = GraphFrame(v, e)
-
+g.cache()
 g.edges.show()
 g.vertices.show();
 
@@ -69,3 +72,4 @@ save_contact_vertex_hdfs_path = hdfs_host + hdfs_root_path + contact_graph_verte
 save_contact_edge_hdsf_path = hdfs_host + hdfs_root_path + contact_graph_edge_file_dest
 g.vertices.write.mode("Overwrite").parquet(save_contact_vertex_hdfs_path)
 g.edges.write.mode("Overwrite").parquet(save_contact_edge_hdsf_path)
+g.unpersist()
