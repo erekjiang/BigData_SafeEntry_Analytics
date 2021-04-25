@@ -17,31 +17,42 @@ case_file_dest = "case_daily_summary.parquet"
 all_data = read_parquet_file(spark, hdfs_host+hdfs_root_path+case_file_dest)
 all_data.printSchema()
 
-# cases_group_by_date = all_data[['diagnosedDate']]\
-#                         .groupby(['diagnosedDate'])\
-#                         .count()\
-#                         .orderBy('diagnosedDate',asending=True)
-
-cases_group_by_date = all_data.withColumn("dayOfWeek", func.dayofweek(all_data["date"]))
-
+#select key columns and append dayOfWeek & Index column
+cases_group_by_date = all_data["date","dailyConfirmed","cumulativeConfirmed",
+                               "dailyImported","localCaseNotResidingInDorms","localCaseResidingInDorms"]\
+                      .withColumn("dayOfWeek", func.dayofweek(all_data["date"]))\
+                      .na.fill(0)
 cases_group_by_date = add_index_to_dataframe(cases_group_by_date)
 cases_group_by_date.show()
 cases_group_by_date.printSchema()
 
+#Show daily confirmed cases linechart
 cases_group_by_date.toPandas().plot(x="date", y="dailyConfirmed")
 plt.title("Daily cases")
 plt.xlabel("Date")
-plt.ylabel("dailyConfirmed")
-#plt.show()
+plt.ylabel("Count")
+plt.rcParams["figure.figsize"] = (30,5)
 
 
+#Show cumulative confirmed cases by day
+cases_group_by_date.toPandas().plot(x="date", y="cumulativeConfirmed")
+plt.title("Daily Cumulative Confirmed Cases")
+plt.xlabel("Date")
+plt.ylabel("Count")
+plt.rcParams["figure.figsize"] = (30,5)
+
+
+#Show dailyConfirmed cases sum group by dayOfWeek
 cases_group_by_day_of_week = cases_group_by_date\
                         .groupby(['dayOfWeek'])\
                         .agg(_sum('dailyConfirmed'))\
                         .orderBy('dayOfWeek',asending=True)
 cases_group_by_day_of_week.show()
+
 cases_group_by_day_of_week.toPandas().plot(kind='bar')
-#plt.show()
+plt.rcParams["figure.figsize"] = (5,5)
+
+
 
 # Split into training data and test data
 total_count = cases_group_by_date.count()
