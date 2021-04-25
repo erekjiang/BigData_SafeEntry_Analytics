@@ -26,7 +26,8 @@ safe_entry_file_dest = "entry_record.parquet"
 case_file_dest = "case.parquet"
 case_daily_file_dest = "case_daily_summary.parquet"
 
-#Step 1: Read & Store resident file
+
+# Step 1: Read & Store resident file
 resident_schema = StructType([StructField("resident_id", StringType(), False),
                               StructField("resident_name", StringType(), True),
                               StructField("nric", StringType(), False),
