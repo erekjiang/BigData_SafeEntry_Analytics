@@ -24,6 +24,8 @@ safe_entry_daily_file_dest = "entry_record.parquet"
 
 # Step 2: read safe entry parquet file
 safe_entry_df= read_parquet_file(spark, hdfs_host + hdfs_root_path + safe_entry_file_dest)
+safe_entry_df.cache()
+
 safe_entry_df.show()
 safe_entry_df.printSchema()
 
@@ -41,6 +43,7 @@ for i in range(len(entry_date)):
     date = entry_date[i][0]
     entry_date_list.append(date)
     safe_entry_daily_df = safe_entry_df.filter(safe_entry_df.entry_date == date)
+    safe_entry_daily_df.cache()
 
     print(date)
     safe_entry_daily_df.show()
@@ -48,7 +51,10 @@ for i in range(len(entry_date)):
 
     case_daily_hdfs_path = hdfs_host + hdfs_root_path + date +"_"+ safe_entry_daily_file_dest
     safe_entry_daily_df.write.mode("Overwrite").parquet(case_daily_hdfs_path)
+    safe_entry_daily_df.unpersist()
 
 f = open("in/tmp/entry_date.txt", "w")
 f.write('\n'.join(entry_date_list))
 f.close()
+
+safe_entry_df.unpersist()
