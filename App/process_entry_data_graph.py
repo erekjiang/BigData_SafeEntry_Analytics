@@ -23,8 +23,10 @@ contact_graph_vertex_file_dest = "contact_graph_vertex.parquet"
 
 # Step 1: read resident parquet file
 resident_df = read_parquet_file(spark, hdfs_host + hdfs_root_path + resident_file_dest)
-# resident_df.show()
-# resident_df.printSchema()
+resident_df.cache()
+
+def lookup_nric(resident_id):
+    return resident_df.filter(resident_df['resident_id'] == resident_id).collect()[0]['nric']
 
 # Step 2: read safe entry parquet file and build close contact graph
 contact_list = []
@@ -40,6 +42,7 @@ for i in range(len(date_list)):
     print('number of rows', safe_entry_daily_df.count())
 
     data_collect = safe_entry_daily_df.rdd.collect()
+
     safe_entry_daily_df.unpersist()
 
     row_count = len(data_collect)
@@ -51,8 +54,10 @@ for i in range(len(date_list)):
             same_place = data_collect[i]['place_id'] == data_collect[j]['place_id']
 
             if (minute_diff > 5 and same_place):
-                contact_tuple_dir1 = (data_collect[i]['resident_id'], data_collect[j]['resident_id'])
-                contact_tuple_dir2 = (data_collect[j]['resident_id'], data_collect[i]['resident_id'])
+                nric_i = lookup_nric(data_collect[i]['resident_id'])
+                nric_j = lookup_nric(data_collect[j]['resident_id'])
+                contact_tuple_dir1 = (nric_i, nric_j)
+                contact_tuple_dir2 = (nric_j, nric_i)
                 contact_list.append(contact_tuple_dir1)
                 contact_list.append(contact_tuple_dir2)
 
@@ -60,7 +65,7 @@ for i in range(len(date_list)):
 print('contact list', contact_list)
 print('number of close contact', len(contact_list))
 
-v = resident_df.withColumnRenamed('resident_id', 'id')
+v = resident_df.withColumnRenamed('nric', 'id')
 e = spark.createDataFrame(contact_list, ['src', 'dst'])
 
 g = GraphFrame(v, e)
@@ -72,4 +77,6 @@ save_contact_vertex_hdfs_path = hdfs_host + hdfs_root_path + contact_graph_verte
 save_contact_edge_hdsf_path = hdfs_host + hdfs_root_path + contact_graph_edge_file_dest
 g.vertices.write.mode("Overwrite").parquet(save_contact_vertex_hdfs_path)
 g.edges.write.mode("Overwrite").parquet(save_contact_edge_hdsf_path)
+
 g.unpersist()
+resident_df.unpersist()
