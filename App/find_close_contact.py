@@ -29,10 +29,9 @@ g = GraphFrame(v, e)
 
 from pyspark.sql.functions import explode
 
-confirmed_cases = ['rid_949']
+confirmed_cases = ['F001576U']
 
 shortest_path_df = g.shortestPaths(landmarks=confirmed_cases)
-shortest_path_df.select("id", "distances").orderBy('id').show(20,False)
 
 shortest_path_df=shortest_path_df.select("id", explode("distances"))
 

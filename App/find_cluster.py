@@ -14,8 +14,8 @@ communities_file_dest = "communities.parquet"
 
 communities_df= read_parquet_file(spark, hdfs_host+hdfs_root_path+communities_file_dest)
 
-resident_id = 'rid_1152'
-label = communities_df.filter("id = '" + resident_id + "'" ).collect()[0]['label']
+confirmed_case = 'F000006D'
+label = communities_df.filter("id = '" + confirmed_case + "'" ).collect()[0]['label']
 
 print('============Resident in the same cluster============')
 communities_df.filter("label = '"+ str(label) +"'").show()
